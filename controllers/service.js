@@ -35,6 +35,7 @@ exports.createService = async (req, res) => {
 			})
 	}
 	catch (error) {
+		console.log(error)
 		return res.status(500)
 			.json({
 				success: false,
@@ -44,7 +45,7 @@ exports.createService = async (req, res) => {
 }
 
 
-exports.getAllSerices = async (req, res) => {
+exports.getAllServices = async (req, res) => {
 	try {
 
 		const services = await serviceSchema.find({});
@@ -58,6 +59,7 @@ exports.getAllSerices = async (req, res) => {
 
 	}
 	catch (error) {
+		console.log(error)
 		return res.status(500)
 			.json({
 				success: false,
@@ -94,6 +96,7 @@ exports.deletService = async (req, res) => {
 			})
 	}
 	catch (error) {
+		console.log(error)
 		return res.status(500)
 			.json({
 				success: false,
