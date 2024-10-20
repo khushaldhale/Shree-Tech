@@ -1,0 +1,27 @@
+{
+  "name": "shree-tech",
+  "version": "1.0.0",
+  "description": "This  is the  our  main businesss  site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khushaldhale/Shree-Tech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khushaldhale/Shree-Tech/issues"
+  },
+  "homepage": "https://github.com/khushaldhale/Shree-Tech#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.2",
+    "nodemon": "^3.1.7"
+  }
+}
