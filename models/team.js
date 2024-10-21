@@ -15,7 +15,7 @@ const teamSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	experince: [
+	experience: [
 		{
 			type: String,
 			required: true
