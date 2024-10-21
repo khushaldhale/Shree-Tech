@@ -35,6 +35,9 @@ app.use("/api/v1/auth", authRoutes);
 const serviceRoutes = require("./routes/serviceRoutes");
 app.use("/api/v1/services", serviceRoutes)
 
+const teamRoutes = require("./routes/teamRoutes");
+app.use("/api/v1/team", teamRoutes)
+
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => {
 	console.log("server is listening at PORT : ", PORT)
