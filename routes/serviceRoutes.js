@@ -3,8 +3,9 @@ const { getAllServices, createService, deletService } = require("../controllers/
 const { authentication } = require("../middlewares/authentication");
 const router = express.Router();
 
-router.get("/", authentication, getAllServices);
+
+// allowed direct access  for get , as  we have to show it as open route 
+router.get("/", getAllServices);
 router.post("/", authentication, createService);
 router.delete("/:id", authentication, deletService)
-
 module.exports = router

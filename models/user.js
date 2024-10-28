@@ -33,6 +33,12 @@ const userSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "TEAM"
 		}
+	],
+	products: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "PRODUCT"
+		}
 	]
 })
 

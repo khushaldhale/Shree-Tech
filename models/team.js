@@ -23,7 +23,7 @@ const teamSchema = new mongoose.Schema({
 	],
 	image_url: {
 		type: String,
-		required: true
+		// required: true
 	}
 })
 

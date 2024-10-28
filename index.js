@@ -9,7 +9,8 @@ app.use(cookies())
 const cors = require("cors");
 app.use(cors(
 	{
-		origin: "*"
+		origin: "http://localhost:3000",
+		credentials: true
 	}
 ))
 
@@ -22,6 +23,8 @@ app.get("/", (req, res) => {
 			message: "server is up and running"
 		})
 })
+
+
 
 // db connection
 const dbConnect = require("./config/database");
@@ -37,6 +40,9 @@ app.use("/api/v1/services", serviceRoutes)
 
 const teamRoutes = require("./routes/teamRoutes");
 app.use("/api/v1/team", teamRoutes)
+
+const productRoutes = require("./routes/productRoutes");
+app.use("/api/v1/products", productRoutes)
 
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => {
