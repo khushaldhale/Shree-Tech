@@ -4,13 +4,15 @@ const teamSchema = require("../models/team");
 
 
 //  file handler and cloudinary code  is not done yet
+//  and image manupulation at express-file upload too
 exports.createTeam = async (req, res) => {
 	try {
 
 		const { fname, lname, position, experience } = req.body;
 		const userId = req.decode._id
 
-		const image = req.files.image;
+		// will work over this later 
+		// const team_image = req.files.team_image;
 		if (!fname || !lname || !position || !experience) {
 			return res.status(404)
 				.json({
@@ -19,17 +21,18 @@ exports.createTeam = async (req, res) => {
 				})
 		}
 
-		if (!image) {
-			return res.status(404)
-				.json({
-					success: false,
-					message: "kindly provide an image "
-				})
-		}
+		// if (!team_image) {
+		// 	return res.status(404)
+		// 		.json({
+		// 			success: false,
+		// 			message: "kindly provide an image "
+		// 		})
+		// }
 
 
 		// have to upload image to cloudinary and  return the url 
-		const team = await teamSchema.create({ fname, lname, position, experience, image_url });
+		// , image_url , as of  now removed from  create method 
+		const team = await teamSchema.create({ fname, lname, position, experience });
 		const user = await userSchema.findByIdAndUpdate(userId, { $push: { team: team._id } }, { new: true });
 
 		return res.status(200)
