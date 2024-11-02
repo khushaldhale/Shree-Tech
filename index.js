@@ -14,6 +14,14 @@ app.use(cors(
 	}
 ))
 
+const fileUpload = require("express-fileupload");
+app.use(fileUpload(
+	{
+		useTempFiles: true,
+		tempFileDir: "/temp/"
+	}
+))
+
 
 
 app.get("/", (req, res) => {
@@ -29,6 +37,10 @@ app.get("/", (req, res) => {
 // db connection
 const dbConnect = require("./config/database");
 dbConnect()
+
+// cloduinary connection 
+const cloudinaryConnect = require("./config/cloudinary");
+cloudinaryConnect()
 
 
 // mapping the routes 

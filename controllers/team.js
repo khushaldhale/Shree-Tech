@@ -1,18 +1,16 @@
 const userSchema = require("../models/user");
 const teamSchema = require("../models/team");
+const fileUpload = require("../utils/cloudinary");
 
 
-
-//  file handler and cloudinary code  is not done yet
-//  and image manupulation at express-file upload too
 exports.createTeam = async (req, res) => {
 	try {
 
 		const { fname, lname, position, experience } = req.body;
 		const userId = req.decode._id
 
-		// will work over this later 
-		// const team_image = req.files.team_image;
+
+		const team_image = req.files.team_image;
 		if (!fname || !lname || !position || !experience) {
 			return res.status(404)
 				.json({
@@ -21,18 +19,19 @@ exports.createTeam = async (req, res) => {
 				})
 		}
 
-		// if (!team_image) {
-		// 	return res.status(404)
-		// 		.json({
-		// 			success: false,
-		// 			message: "kindly provide an image "
-		// 		})
-		// }
+		if (!team_image) {
+			return res.status(404)
+				.json({
+					success: false,
+					message: "kindly provide an image "
+				})
+		}
 
 
-		// have to upload image to cloudinary and  return the url 
-		// , image_url , as of  now removed from  create method 
-		const team = await teamSchema.create({ fname, lname, position, experience });
+		const image_url = await fileUpload(team_image, "study")
+
+		console.log(image_url)
+		const team = await teamSchema.create({ fname, lname, position, experience, image_url });
 		const user = await userSchema.findByIdAndUpdate(userId, { $push: { team: team._id } }, { new: true });
 
 		return res.status(200)
@@ -122,7 +121,6 @@ exports.updateTeam = async (req, res) => {
 		}
 
 		// here we have to remove image from cloudinary first and  then add new image 
-
 		//exception ,  what  if the image is already deleted from there
 
 		const updatedTeam = await teamSchema.findByIdAndUpdate(teamId, { fname, lname, position, experience, image_url }, { new: true })

@@ -6,8 +6,8 @@ exports.authentication = async (req, res, next) => {
 		//  we are  not taking access token from  cookies  instead we are taking it from 
 		// headers 
 		const header = req.headers['authorization'];
-		console.log(header)
 		const accessToken = header && header.split(" ")[1];
+		console.log(" refresh token is ", req.cookies.refreshToken)
 
 		if (!accessToken) {
 			return res.status(401)
@@ -17,7 +17,7 @@ exports.authentication = async (req, res, next) => {
 				})
 		}
 
-	
+
 
 		const decode = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (error, decode) => {
 			if (decode) {
