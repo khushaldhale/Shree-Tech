@@ -1,5 +1,6 @@
 const productSchema = require('../models/products');
-const userSchema = require("../models/user")
+const userSchema = require("../models/user");
+const fileUpload = require('../utils/cloudinary');
 
 
 
@@ -10,8 +11,9 @@ exports.createProduct = async (req, res) => {
 		const { product_name, product_desc } = req.body;
 		const userId = req.decode._id;
 
-		// const product_image = req.files.product_image; 
+		const product_image = req.files.product_image;
 
+		console.log(product_name, product_desc, product_image)
 
 		if (!product_name || !product_desc) {
 			return res.status(404)
@@ -21,16 +23,18 @@ exports.createProduct = async (req, res) => {
 				})
 		}
 
-		// if (!product_image) {
-		// 	return res.status(404)
-		// 		.json({
-		// 			success: false,
-		// 			message: "kindly provide  an product image "
-		// 		})
-		// }
+		if (!product_image) {
+			return res.status(404)
+				.json({
+					success: false,
+					message: "kindly provide  an product image "
+				})
+		}
 
-		// image is remained to add here 
-		const product = await productSchema.create({ product_desc, product_name });
+		const image_url = await fileUpload(product_image, "study")
+
+
+		const product = await productSchema.create({ product_desc, product_name, image_url });
 		const user = await userSchema.findByIdAndUpdate(userId, {
 			$push: {
 				products: product._id

@@ -92,17 +92,12 @@ exports.login = async (req, res) => {
 				expiresIn: "30d"
 			})
 
-			
 
-
-			// in the local environment cookies are not getting set 
-			// thats  why we are sending access and refresh token in memory as of now 
 			res.cookie("refreshToken", refreshToken, {
 				httpOnly: true,
-				sameSite: "lax",
-				secure: false,
+				sameSite: "none",
+				secure: true,
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
-
 
 			})
 				.status(200)
