@@ -9,7 +9,7 @@ app.use(cookies())
 const cors = require("cors");
 app.use(cors(
 	{
-		origin: "https://shree-tech-frontend.onrender.com/",
+		origin: "https://shree-tech-frontend.onrender.com",
 		credentials: true
 	}
 ))
